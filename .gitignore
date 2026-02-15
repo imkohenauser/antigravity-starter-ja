@@ -6,6 +6,7 @@ node_modules/
 Thumbs.db
 
 # IDE
+.vscode/
 .idea/
 *.swp
 *.swo
@@ -30,3 +31,7 @@ refactoring_plan.md
 task.md
 walkthrough.md
 agents_adjustment_proposal.md
+
+# Agent temporary files
+.agent/.tmp/
+.agent/.cache/
