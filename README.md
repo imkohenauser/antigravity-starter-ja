@@ -43,6 +43,19 @@ Antigravityのエージェントは「自律的にタスクを解決する」権
         └── knowledge-cutoff-awareness/
 ```
 
+## ワークフローの使い方
+
+Antigravity のチャット欄で `/` (スラッシュ) を入力すると、利用可能なワークフロー（`.agent/workflows/*.md` で定義されたコマンド）の一覧がオートコンプリート候補として表示されます。
+
+*   **`/ask`**: ファイルを変更せずに相談のみを行う
+*   **`/grasp`**: コードの依存関係や役割を分析する
+*   **`/review`**: コードやテキストのレビューを受ける
+
+これらは一例であり、`.agent/workflows/` ディレクトリで定義されたすべてのワークフローを実行できます。
+また、エディタ右下の `Antigravity - Settings > Customizations [Manage] > Workflows` から、グローバルまたは現在のワークスペース固有のスラッシュコマンドを追加・編集できます。
+
+詳細な仕様については [Antigravity Documentation: Rules & Workflows](https://antigravity.google/docs/rules-workflows) を参照してください。
+
 ## カスタマイズ
 
 | ファイル | 用途 |
