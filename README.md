@@ -20,18 +20,11 @@ Antigravityのエージェントは「自律的にタスクを解決する」権
 2. 「わからない時は止まる」指示
 3. Rules、Workflows、Agent Skills の徹底活用
 
-## クイックスタート
-
-1. このリポジトリをテンプレートとして使用し、新しいリポジトリを作成
-2. `AGENTS.md` の `[...]` を自分のプロジェクトに合わせて編集
-3. Antigravity または Claude Code で開く
-
-## 構造
-
+## Antigravity で利用するファイル
 ```
 ├── AGENTS.md              # 共通プロジェクトガイドライン (SSoT)
 ├── GEMINI.md              # Antigravity 用エントリポイント
-├── CLAUDE.md              # Claude Code 用エントリポイント
+├── CLAUDE.md              # Claude Code 用エントリポイント（オプション）
 └── .agent/
     ├── rules/             # 常時有効ルール
     │   ├── language-strategies.md
