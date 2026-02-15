@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Artifacts (agent-generated, session-specific)
+implementation_plan.md
+refactoring_plan.md
+task.md
+walkthrough.md
+agents_adjustment_proposal.md
