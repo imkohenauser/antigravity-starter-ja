@@ -1,7 +1,7 @@
 {
   "name": "antigravity-starter-ja",
   "version": "1.0.0",
-  "description": "**Antigravity IDE 日本語環境開発スターター 🇯🇵**",
+  "description": "Google Antigravity 日本語 スターター",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

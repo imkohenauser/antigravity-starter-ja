@@ -1,4 +1,4 @@
-# Contributing to Antigravity Starter (Japanese Edition)
+# Contributing to Google Antigravity 日本語 スターター
 
 フィードバックや貢献を歓迎します！
 
