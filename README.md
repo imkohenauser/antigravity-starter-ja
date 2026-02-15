@@ -43,7 +43,17 @@ Antigravityのエージェントは「自律的にタスクを解決する」権
         └── knowledge-cutoff-awareness/
 ```
 
-## ワークフローの使い方
+## ルール (Rules)
+
+`.agent/rules/` ディレクトリに配置されたマークダウンファイルは、エージェントが**常に**遵守すべき行動規範として機能します。
+
+*   **`senior-engineer-conduct.md`**: シニアエンジニアとしての振る舞い（安全性、透明性、思考の深さ）を強制します。
+*   **`git-commit-rules.md`**: GitHub のコミットメッセージ形式を強制します。
+*   **`language-strategies.md`**: 言語使用に関する戦略です。
+    *   **注意**: 内部推論（CoT）やコード自体は英語が推奨されるため、**エージェントの出力が完全に日本語になるわけではなく、日本語出力の可能性が高まるルールです**。
+    *   ユーザー向けの最終出力（チャット、ドキュメント）は日本語になるよう指示されています。
+
+## ワークフロー（Workflows）
 
 Antigravity のチャット欄で `/` (スラッシュ) を入力すると、利用可能なワークフロー（`.agent/workflows/*.md` で定義されたコマンド）の一覧がオートコンプリート候補として表示されます。
 
@@ -55,6 +65,21 @@ Antigravity のチャット欄で `/` (スラッシュ) を入力すると、利
 また、エディタ右下の `Antigravity - Settings > Customizations [Manage] > Workflows` から、グローバルまたは現在のワークスペース固有のスラッシュコマンドを追加・編集できます。
 
 詳細な仕様については [Antigravity Documentation: Rules & Workflows](https://antigravity.google/docs/rules-workflows) を参照してください。
+
+## スキル (Agent Skills)
+
+Skills は、エージェントに追加の能力（外部ツール連携、特定のデータ取得方法など）を与えるための仕組みです。`.agent/skills/` ディレクトリに配置された各スキルの `SKILL.md` に定義された手順に従ってエージェントが行動します。
+
+### knowledge-cutoff-awareness (プリインストール済み)
+
+このスターターテンプレートには、エージェントに「現在のシステム時刻」を認識させるスキルがあらかじめ組み込まれています。
+
+*   **機能**: 現在の日時を取得し、相対的な日付計算（明日、先週など）を行います。
+*   **利点**: 学習データのカットオフ（Knowledge Cutoff）を意識し、「2026年の最新情報」などを検索する際に適切な時間的コンテキストを提供します。
+*   **ソース**: [github.com/imkohenauser/knowledge-cutoff-awareness](https://github.com/imkohenauser/knowledge-cutoff-awareness)
+
+詳細な仕様については [Antigravity Documentation: Skills](https://antigravity.google/docs/skills) を参照してください。
+
 
 ## カスタマイズ
 
