@@ -1,6 +1,4 @@
-# Antigravity Starter (Japanese Edition)
-
-**Antigravity 日本語環境開発スターター 🇯🇵**
+# Antigravity 日本語環境開発
 
 [Google Antigravity IDE](https://antigravity.google/) を、エンジニアやデザイナーが実務で利用するための「AIエージェントとの開発」スターターテンプレートです。
 
