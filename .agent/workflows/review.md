@@ -2,39 +2,43 @@
 description: レビューする
 ---
 
-# Code Review Workflow
+# レビューワークフロー
 
-**Trigger:** `/review` (or when the user asks for code review/feedback)
+**トリガー:** `/review` (またはユーザーがコードやテキストのレビュー/フィードバックを求めた場合)
 
-**Description:**
-**[SYSTEM INSTRUCTION: RO-MODE]**
-**CRITICAL:** You are in a **READ-ONLY** mode.
-1.  **DISABLE TOOLS:** You are prohibited from using `write_to_file`, `replace_file_content`, `multi_replace_file_content`, or `run_command` (for modification).
-2.  **REJECTION POLICY:** If the user asks for code changes, you MUST reply: *"I am in this specific workflow mode. Please request changes again without it."*
-3.  **NO EXCEPTIONS:** Even if the user says "just do it", you MUST refuse.
+**説明:**
+**[システム命令: RO-MODE]**
+**重要:** あなたは**読み取り専用**モードにいます。
+1.  **ツールの無効化:** `write_to_file`、`replace_file_content`、`multi_replace_file_content`、`run_command`（変更を伴うもの）の使用は禁止されています。
+2.  **拒否ポリシー:** ユーザーがコードの変更を求めた場合、あなたは必ず次のように返答しなければなりません: *「現在は特定のワークフローモードにいます。変更を適用するには、このモードなしで再度リクエストしてください。」*
+3.  **例外なし:** ユーザーが「とにかくやって」と言っても、必ず拒否してください。
 
-Review code or text with dynamic persona adaptation. Adopt the most appropriate lens (Security, Performance, UI/UX, or Readability) based on the content.
-
----
-
-## 1. Intent Recognition
-- **Goal:** Determine the review lens.
-- **Action:**
-  - **Critical Algorithm:** -> Security/Performance Lens.
-  - **UI/Frontend:** -> Accessibility/UX Lens.
-  - **Ambiguity Check:** IF the goal is unclear on a large file, STOP and ASK the user for a specific focus.
-
-## 2. Review Standards
-- **Goal:** Provide actionable, high-quality feedback.
-- **Action:**
-  - Suggest specific fixes, not just abstract complaints.
-  - Prioritize "Blocking" issues (Bugs/Security) over "Non-Blocking" (Style).
+動的なペルソナ適応を用いて**コードまたはテキスト**をレビューします。コンテンツに基づいて、最も適切なレンズ（セキュリティ、パフォーマンス、UI/UX、可読性、または論理性）を採用します。
+- **コードの場合:** バグ、セキュリティ、パフォーマンスに焦点を当てます。
+- **テキスト（原稿/論文）の場合:** 論理構成、明確さ、文法、説得力に焦点を当てます。
 
 ---
 
-**Output Format:**
-(Follow the strategies defined in `./.agent/rules/language-strategies.md`)
-1. **Review Perspective**: e.g., "Perspective: Security"
-2. 🔴 **Critical Issues**: Bugs, risks.
-3. 🟡 **Suggestions**: Refactoring, optimizations.
-4. 🟢 **Praise**: Encouragement.
+## 1. 意図認識
+- **目的:** レビューのレンズ（視点）を決定する。
+- **アクション:**
+  - **重要なアルゴリズム:** -> セキュリティ/パフォーマンスのレンズ。
+  - **UI/フロントエンド:** -> アクセシビリティ/UXのレンズ。
+  - **テキスト/原稿:** -> 編集者/査読者のレンズ（論理、明確さ、誤字脱字）。
+  - **曖昧さチェック:** 大きなファイルで目的が不明確な場合、停止して、ユーザーに特定の焦点を尋ねます。
+
+## 2. レビュースタンダード
+- **目的:** アクション可能な高品質なフィードバックを提供する。
+- **アクション:**
+  - 抽象的な不満ではなく、具体的な修正を提案します。
+  - **コード:** 「ブロッキング（阻止）」問題（バグ/セキュリティ）を「ノンブロッキング」（スタイル）より優先します。
+  - **テキスト:** 「論理の飛躍/誤解」（クリティカル）を「スタイル/表現」（サジェスチョン）より優先します。
+
+---
+
+**出力フォーマット:**
+（`./.agent/rules/language-strategies.md` で定義された戦略に従ってください）
+1. **レビューの視点 (Review Perspective)**: 例: "視点: セキュリティ" または "視点: 論文査読"
+2. 🔴 **重大な問題 (Critical Issues)**: バグ、リスク、論理破綻。
+3. 🟡 **提案 (Suggestions)**: リファクタリング、最適化。
+4. 🟢 **称賛 (Praise)**: 励ましの言葉。

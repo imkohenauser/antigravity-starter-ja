@@ -2,59 +2,59 @@
 description: 計画する
 ---
 
-# Planning Workflow
+# 計画ワークフロー
 
-**Trigger:** `/plan` (or when the user explicitly asks for a plan)
+**トリガー:** `/plan` (またはユーザーが明示的に計画を求めた場合)
 
-**Description:**
-**[SYSTEM INSTRUCTION: PLAN-ONLY-MODE]**
-**CRITICAL:** You are in **PLANNING MODE**.
-1.  **DISABLE SOURCE EDITING:** You are prohibited from editing `src/` or project files. You may ONLY write to `implementation_plan.md` (or similar artifacts).
-2.  **STOP AFTER PLAN:** Do NOT implement the plan. Do NOT write code.
-3.  **REJECTION POLICY:** If the user asks to "implement it now", you MUST reply: *"I have created the plan. Please review it, then ask me to implement it in a new turn."*
+**説明:**
+**[システム命令: PLAN-ONLY-MODE]**
+**重要:** あなたは**計画モード**にいます。
+1.  **ソース編集の無効化:** `src/` やプロジェクトファイルの編集は禁止されています。`implementation_plan.md`（または類似の成果物）への書き込みのみが許可されます。
+2.  **計画後の停止:** 計画を実行しないでください。コードを書かないでください。
+3.  **拒否ポリシー:** ユーザーが「今すぐ実装して」と求めた場合、あなたは必ず次のように返答しなければなりません: *「計画を作成しました。確認後、次のターンで実装を依頼してください。」*
 
-Forces a deep reasoning and planning phase akin to "Planning Mode," regardless of the current agent mode (Fast/Pro). This workflow strictly prohibits immediate code execution and focuses solely on generating a comprehensive implementation plan artifact.
-
----
-
-## 1. Context Analysis & Research
-- **Goal:** Understand the user's request and the existing codebase structure.
-- **Action:**
-  - Read relevant files to understand the current implementation.
-  - Identify dependencies, potential risks, and architectural impact.
-  - Do NOT modify any source code files during this step.
-
-## 2. Artifact Generation (The "Brain" Protocol)
-- **Goal:** Persist the plan into the agent's memory structure.
-- **Strict Requirement:** You MUST create or update a markdown file in the appropriate planning directory.
-- **Directory Safety:**
-  - IF the target directory does not exist OR the location is ambiguous: **STOP and ASK the user for the intended destination.**
-- **File Naming Convention:**
-  - Default: `implementation_plan.md`
-  - For Refactoring: `refactoring_plan.md`
-  - For Tasks: `task.md`
-
-## 3. Plan Content Requirements
-(Follow the strategies defined in `./.agent/rules/language-strategies.md`)
-The generated markdown file MUST include the following sections:
-1.  **Objective:** Clear summary of what needs to be achieved.
-2.  **Analysis:** Current state vs. Desired state.
-3.  **Proposed Changes:**
-    - List of files to create or modify.
-    - Specific logic changes (pseudo-code or signatures).
-    - **Verification Plan:** How will we verify the changes work? (e.g., specific test cases).
-4.  **Risk Assessment:** Potential side effects or hallucinations to avoid.
-
-## 4. Strict Implementation Prohibition
-- **Goal:** Separate "Planning" from "Coding".
-- **Rules:**
-  - **ABSOLUTE PROHIBITION:** You are FORBIDDEN from modifying any project source code files during this workflow.
-  - **Allowed Writes:** You may ONLY create or update the planning artifact file (e.g., `implementation_plan.md`).
-  - **Termination:**
-    - After saving the plan, **STOP**.
-    - **Reply:** "Plan created. To proceed with implementation, please review this plan and send a new request (e.g., 'Go ahead')."
+現在のエージェントモード（Fast/Pro）に関係なく、「計画モード」と同様の深い推論と計画フェーズを強制します。このワークフローは、即時のコード実行を厳格に禁止し、包括的な実装計画成果物の生成のみに焦点を当てます。
 
 ---
 
-**System Instruction:**
-Treat the generation of the `implementation_plan.md` as the final output of this workflow. Do not attempt to "be helpful" by implementing the code immediately. Speed is NOT the priority; accuracy and architectural integrity are.
+## 1. コンテキスト分析と調査
+- **目的:** ユーザーのリクエストと既存のコードベース構造を理解する。
+- **アクション:**
+  - 関連ファイルを読み、現在の実装を理解します。
+  - 依存関係、潜在的なリスク、アーキテクチャへの影響を特定します。
+  - このステップ中にソースコードファイルを変更しないでください。
+
+## 2. 成果物生成（"Brain" プロトコル）
+- **目的:** 計画をエージェントのメモリ構造に永続化する。
+- **厳格な要件:** 適切な計画ディレクトリ内のマークダウンファイルを作成または更新しなければなりません。
+- **ディレクトリの安全性:**
+  - ターゲットディレクトリが存在しない場合、または場所が曖昧な場合: **停止して、ユーザーに意図した保存先を尋ねてください。**
+- **ファイル命名規則:**
+  - デフォルト: `implementation_plan.md`
+  - リファクタリング用: `refactoring_plan.md`
+  - タスク用: `task.md`
+
+## 3. 計画内容の要件
+（`./.agent/rules/language-strategies.md` で定義された戦略に従ってください）
+生成されるマークダウンファイルには、以下のセクションを含める必要があります:
+1.  **目的:** 達成すべき内容の明確な要約。
+2.  **分析（現状分析）:** 現状 vs 理想の状態。
+3.  **提案される変更:**
+    - 作成または変更するファイルのリスト。
+    - 具体的なロジックの変更（擬似コードまたはシグネチャ）。
+    - **検証計画:** 変更が機能することをどのように検証しますか？（例: 具体的なテストケース）。
+4.  **リスク評価:** 回避すべき潜在的な副作用やハルシネーション。
+
+## 4. 実装の厳格な禁止
+- **目的:** 「計画」と「コーディング」を分離する。
+- **ルール:**
+  - **絶対禁止:** このワークフロー中にプロジェクトのソースコードファイルを変更することは**禁止**されています。
+  - **許可される書き込み:** 計画成果物ファイル（例: `implementation_plan.md`）の作成または更新のみが許可されます。
+  - **終了:**
+    - 計画を保存した後、**停止**します。
+    - **返答:** 「計画を作成しました。実装に進むには、この計画を確認し、新しいリクエスト（例: '進めてください'）を送信してください。」
+
+---
+
+**システム命令:**
+`implementation_plan.md` の生成をこのワークフローの最終出力として扱ってください。すぐにコードを実装して「親切」にしようとしないでください。速度は優先事項ではありません。正確さとアーキテクチャの整合性が優先されます。

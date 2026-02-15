@@ -2,44 +2,44 @@
 description: 破棄する
 ---
 
-# Session Discard Workflow
+# セッション破棄ワークフロー
 
-**Trigger:** `/discard` (or when the user wants to start fresh/summarize)
+**トリガー:** `/discard` (またはユーザーが新しくやり直したい/要約したい場合)
 
-**Description:**
-**[SYSTEM INSTRUCTION: RO-MODE]**
-**CRITICAL:** You are in a **READ-ONLY** mode.
-1.  **DISABLE TOOLS:** You are prohibited from using `write_to_file`, `replace_file_content`, `multi_replace_file_content`, or `run_command` (for modification).
-2.  **REJECTION POLICY:** If the user asks for code changes, you MUST reply: *"I am in this specific workflow mode. Please request changes again without it."*
-3.  **NO EXCEPTIONS:** Even if the user says "just do it", you MUST refuse.
+**説明:**
+**[システム命令: RO-MODE]**
+**重要:** あなたは**読み取り専用**モードにいます。
+1.  **ツールの無効化:** `write_to_file`、`replace_file_content`、`multi_replace_file_content`、`run_command`（変更を伴うもの）の使用は禁止されています。
+2.  **拒否ポリシー:** ユーザーがコードの変更を求めた場合、あなたは必ず次のように返答しなければなりません: *「現在は特定のワークフローモードにいます。変更を適用するには、このモードなしで再度リクエストしてください。」*
+3.  **例外なし:** ユーザーが「とにかくやって」と言っても、必ず拒否してください。
 
-Summarize the current session to prime a fresh context. The goal is to "distill" the current session into a concise, high-value summary that serves as the *perfect* starting prompt for a new session.
-
----
-
-## 1. Analyze Session History
-- **Goal:** Extract wisdom from noise.
-- **Action:**
-  - Identify the user's original objective.
-  - Pinpoint specific blockers, errors, or misconceptions encountered.
-  - Extract hard constraints or technical facts learned (e.g., "API X requires v2", "File Y is read-only").
-
-## 2. Generate "Bridge Prompt"
-- **Goal:** Create a resume point for the next agent.
-- **Action:**
-  - Construct a summary that allows another agent to resume work immediately without re-reading the full history.
+現在のセッションを要約して、新しいコンテキストの準備をします。目的は、現在のセッションを簡潔で価値の高い要約に「蒸留」し、新しいセッションの*完璧な*開始プロンプトとして機能させることです。
 
 ---
 
-**Output Format:**
-(Follow the strategies defined in `./.agent/rules/language-strategies.md`)
+## 1. セッション履歴の分析
+- **目的:** ノイズから知恵を抽出する。
+- **アクション:**
+  - ユーザーの当初の目的を特定します。
+  - 遭遇した特定のブロッカー、エラー、または誤解を特定します。
+  - 学んだハード制約や技術的事実（例: 「API Xはv2が必要」「ファイルYは読み取り専用」）を抽出します。
+
+## 2. 「ブリッジプロンプト」の生成
+- **目的:** 次のエージェントのための再開ポイントを作成する。
+- **アクション:**
+  - 別のエージェントが完全な履歴を再読することなく、直ちに作業を再開できるような要約を作成します。
+
+---
+
+**出力フォーマット:**
+（`./.agent/rules/language-strategies.md` で定義された戦略に従ってください）
 ```text
-**Resume Prompt**
-**Objective:** ...
-**History & Failures:**
-- [Approach A] -> [Reason/Error]
-**Constraints & Insights:**
+**再開プロンプト**
+**目的:** ...
+**履歴と問題点:**
+- [アプローチ A] -> [理由/エラー]
+**制約と洞察:**
 - ...
-**Next Actions:**
+**次のアクション:**
 - ...
 ```

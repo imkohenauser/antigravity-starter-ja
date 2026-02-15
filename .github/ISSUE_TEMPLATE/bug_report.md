@@ -1,32 +1,32 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: バグ報告 (Bug report)
+about: 改善のためにバグレポートを作成してください
 title: ''
 labels: bug
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**バグの説明 (Describe the bug)**
+バグの内容について、明確かつ簡潔に説明してください。
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '...'
-3. Scroll down to '...'
-4. See error
+**再現手順 (To Reproduce)**
+現象を再現するための手順:
+1. '...' に移動する
+2. '...' をクリックする
+3. '...' までスクロールする
+4. エラーを確認する
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**期待される動作 (Expected behavior)**
+期待していた動作について、明確かつ簡潔に説明してください。
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**スクリーンショット (Screenshots)**
+可能であれば、問題を説明するためのスクリーンショットを追加してください。
 
-**Desktop (please complete the following information):**
- - OS: [e.g. macOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+**環境 (Desktop):**
+ - OS: [例: macOS]
+ - ブラウザ [例: chrome, safari]
+ - バージョン [例: 22]
 
-**Additional context**
-Add any other context about the problem here.
+**追加のコンテキスト (Additional context)**
+問題に関するその他のコンテキストがあれば、ここに追記してください。

@@ -2,47 +2,47 @@
 description: 相談する
 ---
 
-# Consultation Workflow
+# 相談ワークフロー
 
-**Trigger:** `/ask` (or when the user explicitly asks for advice/consultation)
+**トリガー:** `/ask` (またはユーザーが助言や相談を求めた場合)
 
-**Description:**
-**[SYSTEM INSTRUCTION: RO-MODE]**
-**CRITICAL:** You are in a **READ-ONLY** consultation mode.
-1.  **DISABLE TOOLS:** You are prohibited from using `write_to_file`, `replace_file_content`, `multi_replace_file_content`, or `run_command` (for modification).
-2.  **REJECTION POLICY:** If the user asks for code changes, you MUST reply: *"I am in consultation mode (/ask). Please request changes again without /ask."*
-3.  **NO EXCEPTIONS:** Even if the user says "just do it", you MUST refuse.
+**説明:**
+**[システム命令: RO-MODE]**
+**重要:** あなたは**読み取り専用**の相談モードにいます。
+1.  **ツールの無効化:** `write_to_file`、`replace_file_content`、`multi_replace_file_content`、`run_command`（変更を伴うもの）の使用は禁止されています。
+2.  **拒否ポリシー:** ユーザーがコードの変更を求めた場合、あなたは必ず次のように返答しなければなりません: *「現在は相談モード（/ask）です。変更を適用するには、/ask なしで再度リクエストしてください。」*
+3.  **例外なし:** ユーザーが「とにかくやって」と言っても、必ず拒否してください。
 
-Consult as a Neutral 3rd Party (Zero-Context Strategy). You are temporarily NOT an active project participant and view requests in isolation to provide objective advice.
-
----
-
-## 1. Zero-Context Default
-- **Goal:** Provide objective, standard-compliant advice without project bias.
-- **Action:**
-  - Assume a "greenfield" environment.
-  - Advise based *strictly* on industry standards, official docs, and modern best practices.
-  - **Constraint:** Do NOT infer or reference existing project files/conventions unless explicitly provided.
-
-## 2. On-Demand Context
-- **Goal:** Minimize context pollution.
-- **Action:**
-  - ONLY read specific files if the user explicitly writes: "Check [Filename]" or "In this context...".
-
-## 3. Strict Read-Only Policy
-- **Goal:** Guarantee zero contamination of the project state.
-- **Rules:**
-  - **ABSOLUTE PROHIBITION:** You are FORBIDDEN from using `write_to_file`, `replace_file_content`, or any mutation tools.
-  - **No Command Execution:** Do NOT run commands that alter state (e.g., `npm install`, `git commit`).
-  - **Handling Edit Requests:**
-    - If the user asks you to implement code or change files:
-      - **REFUSE** to do it within this workflow.
-      - **Reply:** "This is a read-only consultation mode (/ask). To apply these changes, please send a new request without `/ask`."
+中立的な第三者として相談に乗ります（ゼロコンテキスト戦略）。あなたは一時的にプロジェクトの参加者ではなくなり、客観的な助言を提供するためにリクエストを独立して捉えます。
 
 ---
 
-**Output Guidelines:**
-- **Tone:** Objective, technical, and concise.
-- **No Meta-Commentary:** Do NOT state your role ("As a consultant..."). Just provide the solution.
-- **No Fluff:** Provide direct answers/solutions. No apologies or filler.
-- **Language:** Follow the strategies defined in `./.agent/rules/language-strategies.md`.
+## 1. ゼロコンテキスト・デフォルト
+- **目的:** プロジェクトのバイアスなしに、客観的で標準に準拠した助言を提供する。
+- **アクション:**
+  - 「グリーンフィールド（更地）」環境を想定します。
+  - *厳密に*業界標準、公式ドキュメント、現代のベストプラクティスに基づいて助言します。
+  - **制約:** 明示的に提供されない限り、既存のプロジェクトファイルや慣習を推測・参照しないでください。
+
+## 2. オンデマンド・コンテキスト
+- **目的:** コンテキスト汚染を最小限に抑える。
+- **アクション:**
+  - ユーザーが明示的に「[ファイル名]を確認して」または「この文脈で...」と書いた場合のみ、特定のファイルを読み取ります。
+
+## 3. 厳格な読み取り専用ポリシー
+- **目的:** プロジェクト状態の汚染をゼロに保つ。
+- **ルール:**
+  - **絶対禁止:** `write_to_file`、`replace_file_content`、およびその他の変更ツールを使用することは**禁止**されています。
+  - **コマンド実行なし:** 状態を変更するコマンド（例：`npm install`、`git commit`）を実行しないでください。
+  - **編集要求の処理:**
+    - ユーザーがコードの実装やファイルの変更を求めた場合:
+      - このワークフロー内での実行を**拒否**します。
+      - **返答:** 「現在は読み取り専用の相談モード（/ask）です。これらの変更を適用するには、`/ask` なしで新しいリクエストを送信してください。」
+
+---
+
+**出力ガイドライン:**
+- **トーン:** 客観的、技術的、簡潔。
+- **メタ解説なし:** 自分の役割を述べないでください（「コンサルタントとして...」など）。解決策のみを提供してください。
+- **無駄話なし:** 直接的な回答/解決策を提供してください。謝罪や繋ぎ言葉は不要です。
+- **言語:** `./.agent/rules/language-strategies.md` で定義された戦略に従ってください。

@@ -4,32 +4,32 @@ description: コミットメッセージ生成（日本語）
 
 # Commit Message Generator (日本語)
 
-**Trigger:** `/commit-ja`
+**トリガー:** `/commit-ja`
 
-**Description:**
+**説明:**
 staged 変更から Conventional Commits 形式のコミットメッセージを**日本語**で生成する。
 
-> **Note:** このワークフローは git の状態を読み取りますが、ファイルの変更は行いません。
+> **注意:** このワークフローは git の状態を読み取りますが、ファイルの変更は行いません。
 > コミットルールは `.agent/rules/git-commit-rules.md` に定義されています。
 
 ---
 
 ## 1. staged 変更の分析
-- **Goal:** 変更内容を把握する。
-- **Action:**
+- **目的:** 変更内容を把握する。
+- **アクション:**
   - `git diff --cached` を実行し、staged 変更を確認する。
   - **staged 変更がない場合:** 「ステージされた変更がありません。まずファイルをステージしてください。」とだけ返答して終了。
   - 変更の論理単位（変更ファイル、追加、削除）を特定する。
 
 ## 2. 変更タイプの分類
-- **Goal:** Conventional Commits の適切な type を決定する。
-- **Action:**
+- **目的:** Conventional Commits の適切な type を決定する。
+- **アクション:**
   - 最も正確な type を選択: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `chore`, `build`, `ci`, `revert`
   - **複数の type にまたがる場合:** コミットの分割を提案してからメッセージを生成する。
 
 ## 3. コミットメッセージの生成
-- **Goal:** そのまま使えるコミットメッセージを出力する。
-- **Action:**
+- **目的:** そのまま使えるコミットメッセージを出力する。
+- **アクション:**
   - `.agent/rules/git-commit-rules.md` のすべてのルールに従う。
   - **言語:** 日本語（type は英語のまま）。
   - **Description:** 自然な日本語、業務調（丁寧すぎず簡潔）、50文字以内。

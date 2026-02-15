@@ -2,42 +2,42 @@
 description: 把握する
 ---
 
-# Grasp Context Workflow
+# コンテキスト把握ワークフロー
 
-**Trigger:** `/grasp` (or when the user wants to understand dependencies)
+**トリガー:** `/grasp` (またはユーザーが依存関係を理解したい場合)
 
-**Description:**
-**[SYSTEM INSTRUCTION: RO-MODE]**
-**CRITICAL:** You are in a **READ-ONLY** mode.
-1.  **DISABLE TOOLS:** You are prohibited from using `write_to_file`, `replace_file_content`, `multi_replace_file_content`, or `run_command` (for modification).
-2.  **REJECTION POLICY:** If the user asks for code changes, you MUST reply: *"I am in this specific workflow mode. Please request changes again without it."*
-3.  **NO EXCEPTIONS:** Even if the user says "just do it", you MUST refuse.
+**説明:**
+**[システム命令: RO-MODE]**
+**重要:** あなたは**読み取り専用**モードにいます。
+1.  **ツールの無効化:** `write_to_file`、`replace_file_content`、`multi_replace_file_content`、`run_command`（変更を伴うもの）の使用は禁止されています。
+2.  **拒否ポリシー:** ユーザーがコードの変更を求めた場合、あなたは必ず次のように返答しなければなりません: *「現在は特定のワークフローモードにいます。変更を適用するには、このモードなしで再度リクエストしてください。」*
+3.  **例外なし:** ユーザーが「とにかくやって」と言っても、必ず拒否してください。
 
-Analyze code role, dependencies, and impact. Map the selected code's place within the wider project ecosystem.
-
----
-
-## 1. Impact Assessment
-- **Goal:** Determine the scope of analysis.
-- **Action:**
-  - **High Impact (Hub Node):** If the code is widely used (imported by >5 files) or core infrastructure:
-    - STOP and OFFER options: (1) Upstream Usage, (2) Downstream Deps, (3) High-level Overview.
-  - **Standard Node:** Proceed directly to analysis.
-
-## 2. Analysis Dimensions
-- **Goal:** Provide a 360-degree view.
-- **Action:**
-  - **Role:** What problem does this solve?
-  - **Inbound:** Who depends on this? (Risk of breaking changes)
-  - **Outbound:** What does this depend on? (Complexity cost)
+コードの役割、依存関係、影響を分析します。選択されたコードのプロジェクトエコシステム内での位置付けをマッピングします。
 
 ---
 
-**Output Format:**
-(Follow the strategies defined in `./.agent/rules/language-strategies.md`)
-1.  **Role Definition**
-2.  **Dependency Map**:
-    - ⬅️ **Used By**: ...
-    - ➡️ **Uses**: ...
-3.  **Impact Analysis**
-4.  **Related Assets**: Tests, Docs, etc.
+## 1. 影響評価
+- **目的:** 分析の範囲を決定する。
+- **アクション:**
+  - **高影響（ハブノード）:** コードが広く使用されている（5ファイル以上からインポートされている）場合、またはコアインフラストラクチャの場合:
+    - 停止してオプションを提示します: (1) 上流の使用状況、(2) 下流の依存関係、(3) ハイレベルな概要。
+  - **標準ノード:** 直接分析に進みます。
+
+## 2. 分析次元
+- **目的:** 360度の視点を提供する。
+- **アクション:**
+  - **役割:** これは何の問題を解決しますか？
+  - **インバウンド:** 誰がこれに依存していますか？（破壊的変更のリスク）
+  - **アウトバウンド:** これはに何に依存していますか？（複雑さのコスト）
+
+---
+
+**出力フォーマット:**
+（`./.agent/rules/language-strategies.md` で定義された戦略に従ってください）
+1.  **役割定義**
+2.  **依存関係マップ**:
+    - ⬅️ **被依存（Used By）**: ...
+    - ➡️ **依存（Uses）**: ...
+3.  **影響分析**
+4.  **関連資産**: テスト、ドキュメントなど

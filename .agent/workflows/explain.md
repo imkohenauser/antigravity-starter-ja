@@ -2,39 +2,39 @@
 description: 説明する
 ---
 
-# Code Explanation Workflow
+# 説明ワークフロー
 
-**Trigger:** `/explain` (or when the user asks for code clarification)
+**トリガー:** `/explain` (またはユーザーが説明を求めた場合)
 
-**Description:**
-**[SYSTEM INSTRUCTION: RO-MODE]**
-**CRITICAL:** You are in a **READ-ONLY** mode.
-1.  **DISABLE TOOLS:** You are prohibited from using `write_to_file`, `replace_file_content`, `multi_replace_file_content`, or `run_command` (for modification).
-2.  **REJECTION POLICY:** If the user asks for code changes, you MUST reply: *"I am in this specific workflow mode. Please request changes again without it."*
-3.  **NO EXCEPTIONS:** Even if the user says "just do it", you MUST refuse.
+**説明:**
+**[システム命令: RO-MODE]**
+**重要:** あなたは**読み取り専用**モードにいます。
+1.  **ツールの無効化:** `write_to_file`、`replace_file_content`、`multi_replace_file_content`、`run_command`（変更を伴うもの）の使用は禁止されています。
+2.  **拒否ポリシー:** ユーザーがコードの変更を求めた場合、あなたは必ず次のように返答しなければなりません: *「現在は特定のワークフローモードにいます。変更を適用するには、このモードなしで再度リクエストしてください。」*
+3.  **例外なし:** ユーザーが「とにかくやって」と言っても、必ず拒否してください。
 
-Explain complex code simply, focusing on the "Why" and "How", not just line-by-line reading.
-
----
-
-## 1. Scope Determination
-- **Goal:** Identify the relevant code segment.
-- **Action:**
-  - **IF Selection Exists:** Focus ONLY on the selected lines.
-  - **IF No Selection:** Focus on the Active File.
-  - **IF File is Huge/Complex:** STOP and ASK the user for focus (Summary vs. Specific Logic).
-
-## 2. Explanation Strategy
-- **Goal:** Translate code to human understanding.
-- **Action:**
-  - Explain the *intent*, *data flow*, and *architectural decisions*.
+複雑なコードや概念を単純に説明し、単なる行ごとの読み上げではなく、「なぜ」と「どのように」に焦点を当てます。
 
 ---
 
-**Output Guidelines:**
-(Follow the strategies defined in `./.agent/rules/language-strategies.md`)
-- **Tone:** Technical and clear. Avoid patronizing language.
-- **Format:**
-  1.  **Summary:** 1-2 sentences on *what* this does.
-  2.  **Key Logic:** Critical flows, state changes, or algorithms.
-  3.  **Technical Note:** Quality assessment, edge cases, or design patterns used.
+## 1. スコープの決定
+- **目的:** 関連するコードセグメントを特定する。
+- **アクション:**
+  - **選択範囲がある場合:** 選択された行のみに焦点を当てます。
+  - **選択範囲がない場合:** アクティブなファイルに焦点を当てます。
+  - **ファイルが巨大/複雑な場合:** 停止して、ユーザーに焦点を確認します（要約 vs 特定のロジック）。
+
+## 2. 説明戦略
+- **目的:** コードを人間が理解できるように翻訳する。
+- **アクション:**
+  - *意図*、*データフロー*、*アーキテクチャ上の決定*を説明します。
+
+---
+
+**出力ガイドライン:**
+（`./.agent/rules/language-strategies.md` で定義された戦略に従ってください）
+- **トーン:** 技術的で明確。恩着せがましい言葉遣いは避けてください。
+- **フォーマット:**
+  1.  **概要:** これが*何*をするのかについて1～2文。
+  2.  **主要ロジック:** 重要なフロー、状態変化、またはアルゴリズム。
+  3.  **技術的メモ:** 品質の評価、エッジケース、または使用されているデザインパターン。
