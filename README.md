@@ -89,6 +89,101 @@ Skills は、エージェントに追加の能力（外部ツール連携、特�
 | `.agent/rules/` | エージェントの行動規範を追加・編集 |
 | `.agent/workflows/` | 独自のスラッシュコマンドを追加 |
 
+## 参考：作者の個人設定紹介
+
+Antigravity の挙動を安定させ、コンテキスト汚染を防ぐための推奨設定です。好みで調整してください。
+
+### 1. プロジェクト共通設定 (`~/.gemini/GEMINI.md`)
+
+*   **設定なし** (空ファイル推奨)
+*   理由: グローバル設定に依存せず、プロジェクト毎に `antigravity-starter-ja` を配置して文脈を完全に分離するため。
+
+### 2. Antigravity IDE 設定
+
+ウィンドウ右下の `Antigravity - Settings` からの設定です。エージェントの「自律性」と「安全性」のバランスを調整します。
+
+#### Security (セキュリティ)
+*   `Strict Mode`: **Off**
+
+#### Artifact (成果物・生成コード)
+*   `Review Policy`: **Request Review** (必ず人間が確認を行う)
+
+#### Terminal (ターミナル)
+*   `Command Auto Execution`: **Always Proceed** (確認プロンプトをスキップ)
+*   `Enable Sandbox`: **On** (ネットワーク許可)
+
+#### Automation (自動化・ファイル操作)
+*   `Agent Auto-Fix Lints`: **Off** (動作軽量化のため無効化)
+*   `Auto-Continue`: **On**
+*   `Auto-Open Edited Files`: **On**
+
+#### History & Context (履歴・コンテキスト)
+*   `Conversation History`: **Off** (重要: 過去のチャット履歴による文脈汚染を防ぐ)
+*   `Knowledge`: **Off** (重要: 不正確なRAG検索を避け、都度読み込みさせる)
+
+### 3. エディタ設定 (`settings.json`)
+
+エージェントとエディタ機能の競合（フォーマッターの喧嘩など）を防ぐための設定です。
+
+```json
+{
+  // --- 表示・ラッピング制御 ---
+  "editor.wordWrap": "off",
+  "editor.wordWrapColumn": 0,
+  "editor.wrappingIndent": "none",
+  "editor.rulers": [],
+  "editor.minimap.enabled": false,
+  
+  // --- フォーマット制御 (エージェントとの競合回避) ---
+  "editor.formatOnType": false,
+  "editor.formatOnPaste": false,
+  "files.trimTrailingWhitespace": false,
+  "files.insertFinalNewline": false,
+  "files.trimFinalNewlines": false,
+  
+  // --- 保存時コードアクションの無効化 ---
+  "editor.codeActionsOnSave": {
+      "source.fixAll": "never",
+      "source.organizeImports": "never"
+  },
+  
+  // --- エージェント用プロファイル設定 ---
+  "workbench.settings.applyToAllProfiles": [
+      "editor.wordWrap",
+      "editor.formatOnSave",
+      "files.trimTrailingWhitespace"
+  ],
+  
+  // --- その他 ---
+  "editor.accessibilitySupport": "off",
+  "editor.comments.ignoreEmptyLines": false,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[prompt]": {},
+  "editor.dropIntoEditor.preferences": [],
+  
+  // --- 言語固有設定 ---
+  "html.format.wrapAttributes": "preserve",
+  "html.format.wrapLineLength": 0,
+  "css.format.newlineBetweenRules": false,
+  "javascript.format.semicolons": "ignore",
+  "typescript.format.semicolons": "ignore",
+  
+  // --- ユーザー設定 (好み) ---
+  "editor.autoIndent": "brackets",
+  "editor.tabSize": 2
+}
+```
+
+### 4. 推奨拡張機能 (Extensions)
+
+無闇な拡張機能の追加はエージェントのコンテキスト認識に悪影響を与える可能性があるため、必要最小限の構成を推奨します。
+
+*   [Japanese Language Pack for Visual Studio Code](https://open-vsx.org/extension/MS-CEINTL/vscode-language-pack-ja)
+*   [Extension Pack for Java](https://open-vsx.org/extension/vscjava/vscode-java-pack)
+*   [GitHub Theme](https://open-vsx.org/extension/GitHub/github-vscode-theme)
+*   [GitHub Actions](https://open-vsx.org/extension/GitHub/vscode-github-actions)
+*   [GitHub Pull Requests](https://open-vsx.org/extension/GitHub/vscode-pull-request-github)
+
 ## ライセンス
 
 ISC
