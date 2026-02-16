@@ -8,7 +8,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "knowledge-cutoff-awareness": "github:imkohenauser/knowledge-cutoff-awareness"
   }
 }
