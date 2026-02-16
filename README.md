@@ -95,8 +95,8 @@ Antigravity の挙動を安定させ、コンテキスト汚染を防ぐため�
 
 ### 1. プロジェクト共通設定 (`~/.gemini/GEMINI.md`)
 
-*   **設定なし** (空ファイル推奨)
-*   理由: グローバル設定に依存せず、プロジェクト毎に `antigravity-starter-ja` を配置して文脈を完全に分離するため。
+**設定なし**  
+プロジェクト毎に `antigravity-starter-ja` を配置。
 
 ### 2. Antigravity IDE 設定
 
