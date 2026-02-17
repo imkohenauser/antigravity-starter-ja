@@ -29,7 +29,8 @@ Antigravityのエージェントは「自律的にタスクを解決する」権
     ├── rules/             # 常時有効ルール
     │   ├── language-strategies.md
     │   ├── senior-engineer-conduct.md
-    │   └── git-commit-rules.md
+    │   ├── git-commit-rules.md
+    │   └── indexing-codebase.md
     ├── workflows/         # スラッシュコマンド
     │   ├── ask.md         # /ask       相談（読み取り専用）
     │   ├── plan.md        # /plan      計画（実装禁止）
@@ -40,7 +41,8 @@ Antigravityのエージェントは「自律的にタスクを解決する」権
     │   ├── commit.md      # /commit    コミットメッセージ生成（英語）
     │   └── commit-ja.md   # /commit-ja コミットメッセージ生成（日本語）
     └── skills/            # 拡張スキル
-        └── knowledge-cutoff-awareness/
+        ├── knowledge-cutoff-awareness/
+        └── indexing-awareness/
 ```
 
 ## ルール (Rules)
@@ -48,6 +50,7 @@ Antigravityのエージェントは「自律的にタスクを解決する」権
 `.agent/rules/` ディレクトリに配置されたマークダウンファイルは、エージェントが**常に**遵守すべき行動規範として機能します。
 
 *   **`senior-engineer-conduct.md`**: シニアエンジニアとしての振る舞い（安全性、透明性、思考の深さ）を強制します。
+*   **`indexing-codebase.md`**: プロジェクト構造認識（Context Awareness）を強制します。推測でファイルパスや依存関係を捏造せず、必ず実在確認を行ってから行動することを定めています。
 *   **`git-commit-rules.md`**: GitHub のコミットメッセージ形式を強制します。
 *   **`language-strategies.md`**: 言語使用に関する戦略です。
     *   **注意**: 内部推論（CoT）やコード自体は英語が推奨されるため、**エージェントの出力が完全に日本語になるわけではなく、日本語出力の可能性が高まるルールです**。
@@ -57,9 +60,16 @@ Antigravityのエージェントは「自律的にタスクを解決する」権
 
 Antigravity のチャット欄で `/` (スラッシュ) を入力すると、利用可能なワークフロー（`.agent/workflows/*.md` で定義されたコマンド）の一覧がオートコンプリート候補として表示されます。
 
-*   **`/ask`**: ファイルを変更せずに相談のみを行う
-*   **`/grasp`**: コードの依存関係や役割を分析する
-*   **`/review`**: コードやテキストのレビューを受ける
+| コマンド | 説明 | モード |
+|---|---|---|
+| `/ask` | ファイルを変更せずに相談のみを行う | 読み取り専用 |
+| `/plan` | 実装計画を作成する（コード編集禁止） | 計画モード |
+| `/grasp` | コードの依存関係や役割を分析する | 読み取り専用 |
+| `/review` | コードやテキストのレビューを受ける | - |
+| `/explain` | コードや仕様について詳しく説明を求める | - |
+| `/commit` | Gitのコミットメッセージを生成（英語） | - |
+| `/commit-ja` | Gitのコミットメッセージを生成（日本語） | - |
+| `/discard` | 現在のセッション内容を要約して破棄 | - |
 
 これらは一例であり、`.agent/workflows/` ディレクトリで定義されたすべてのワークフローを実行できます。
 また、エディタ右下の `Antigravity - Settings > Customizations [Manage] > Workflows` から、グローバルまたは現在のワークスペース固有のスラッシュコマンドを追加・編集できます。
@@ -77,6 +87,11 @@ Skills は、エージェントに追加の能力（外部ツール連携、特�
 *   **機能**: 現在の日時を取得し、相対的な日付計算（明日、先週など）を行います。
 *   **利点**: 学習データのカットオフ（Knowledge Cutoff）を意識し、「2026年の最新情報」などを検索する際に適切な時間的コンテキストを提供します。
 *   **ソース**: [github.com/imkohenauser/knowledge-cutoff-awareness](https://github.com/imkohenauser/knowledge-cutoff-awareness)
+
+### indexing-awareness (v1.1.0 追加)
+
+*   **機能**: プロジェクト構造とドキュメント（Usage）の整合性を検証します。
+*   **利点**: 「ルールがあるのにドキュメントに書いてない」といった状態（隠れルール）を防ぎ、エージェントの認識齟齬を減らします。
 
 詳細な仕様については [Antigravity Documentation: Skills](https://antigravity.google/docs/skills) を参照してください。
 

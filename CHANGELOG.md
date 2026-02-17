@@ -5,6 +5,14 @@
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-02-17
+
+### Added
+- 新しいルール `indexing-codebase.md` を追加（プロジェクト構造認識の強制）
+- `README.md` にルール `indexing-codebase.md` の説明とファイルツリーを追加
+- `README.md` の記述漏れ修正
+- 新しいスキル `indexing-awareness` を追加（プロジェクト構造自動検証ツール）
+
 ## [1.0.0] - 2026-02-15
 
 ### Added
@@ -15,5 +23,6 @@
 - Git コミットメッセージ規約（`git-commit-rules.md`）
 - 言語戦略ルール（`language-strategies.md`）
 
-[Unreleased]: https://github.com/imkohenauser/antigravity-starter-ja/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/imkohenauser/antigravity-starter-ja/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/imkohenauser/antigravity-starter-ja/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/imkohenauser/antigravity-starter-ja/releases/tag/v1.0.0
