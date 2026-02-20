@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * Cross-platform date utility for AI agents.
  * 

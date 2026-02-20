@@ -14,14 +14,14 @@ It uses the system's `date` command via a wrapper script to provide consistent c
 To get the current date and time in ISO 8601 format (recommended for machine parsing):
 
 ```bash
-node .agent/skills/knowledge-cutoff-awareness/scripts/get_date.js
+node scripts/get_date.js
 # Output: 2026-02-16T16:55:00+09:00
 ```
 
 To get a human-readable format:
 
 ```bash
-node .agent/skills/knowledge-cutoff-awareness/scripts/get_date.js --human
+node scripts/get_date.js --human
 # Output: Mon Feb 16 2026 16:55:00 GMT+0900 (JST)
 ```
 
@@ -30,22 +30,22 @@ You can easily calculate relative dates using simple arguments. The output will 
 
 - **Get tomorrow:**
   ```bash
-  node .agent/skills/knowledge-cutoff-awareness/scripts/get_date.js +1d
+  node scripts/get_date.js +1d
   ```
 
 - **Get date 2 weeks ago:**
   ```bash
-  node .agent/skills/knowledge-cutoff-awareness/scripts/get_date.js -2w
+  node scripts/get_date.js -2w
   ```
 
 - **Get date 1 month from now:**
   ```bash
-  node .agent/skills/knowledge-cutoff-awareness/scripts/get_date.js +1m
+  node scripts/get_date.js +1m
   ```
 
 - **Get yesterday (keyword):**
   ```bash
-  node .agent/skills/knowledge-cutoff-awareness/scripts/get_date.js yesterday
+  node scripts/get_date.js yesterday
   ```
 
 **Supported units:** `d` (days), `w` (weeks), `m` (months), `y` (years).
@@ -54,7 +54,7 @@ You can easily calculate relative dates using simple arguments. The output will 
 To see all available options:
 
 ```bash
-node .agent/skills/knowledge-cutoff-awareness/scripts/get_date.js --help
+node scripts/get_date.js --help
 ```
 
 ## Limitations
