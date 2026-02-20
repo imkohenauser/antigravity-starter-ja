@@ -5,6 +5,9 @@
 
 ## [Unreleased]
 
+### Changed
+- `knowledge-cutoff-awareness` スキルを v1.0.1 に更新
+
 ## [1.1.0] - 2026-02-17
 
 ### Added
