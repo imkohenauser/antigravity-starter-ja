@@ -1,12 +1,14 @@
 ---
 name: knowledge-cutoff-awareness
-description: Get current date, time, and calculate relative dates using system tools.
+description: Retrieve the current system date and time to anchor the agent in present reality. Use for questions involving today, current time, recent events, or information newer than the model's training data to prevent knowledge-cutoff errors and fictionalization of real facts.
 ---
 
 # knowledge-cutoff-awareness
 
 This skill allows you to get the current date and time, and perform date calculations.
 It uses the system's `date` command via a wrapper script to provide consistent current time output.
+
+For when to use this skill, when not to use it, agent instructions, examples, and reliability notes, see [references/examples.md](references/examples.md).
 
 ## Usage
 
@@ -61,4 +63,3 @@ node scripts/get_date.js --help
 
 - **System Time Dependency**: This skill relies on the underlying system time. If the system clock is incorrect, the output will be incorrect.
 - **Timezone**: The ISO 8601 output includes the local timezone offset of the machine running the script.
-
